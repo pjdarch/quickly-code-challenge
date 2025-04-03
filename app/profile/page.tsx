@@ -49,16 +49,10 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto py-10 px-4 max-w-6xl">
+      <div className="container mx-auto py-10 px-4 max-w-lg">
         <header className="space-y-0.5">
           <h2 className="text-2xl font-bold tracking-tight">Profile</h2>
-          <p className="text-muted-foreground">
-            Your basic information, such as name, company name and expected
-            activity should already be filled out from when you created your
-            account.
-          </p>
         </header>
-        
         <main className="flex flex-col md:flex-row gap-8 mt-8">
           <section className="flex-1">
             <div className="space-y-6">
