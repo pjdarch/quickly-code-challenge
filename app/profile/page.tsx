@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { UserResponse } from "../api/auth/user/route";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const fetchUserProfile = async (): Promise<UserResponse | null> => {
   try {
@@ -24,7 +25,7 @@ export default function ProfilePage() {
   const [profileData, setProfileData] = useState({
     name: "",
     companyName: "",
-    expectedActivity: "",
+    companyExpectedActivity: "",
   });
   const [error, setError] = useState("");
 
@@ -36,7 +37,7 @@ export default function ProfilePage() {
         setProfileData({
           name: data.user.full_name || "",
           companyName: data.user.Company.name || "",
-          expectedActivity: data.user.Company.expected_activity || "",
+          companyExpectedActivity: data.user.Company.expected_activity || "",
         });
       } else {
         setError("Failed to fetch profile data.");
@@ -57,17 +58,17 @@ export default function ProfilePage() {
             account.
           </p>
         </header>
-
+        
         <main className="flex flex-col md:flex-row gap-8 mt-8">
           <section className="flex-1">
             <div className="space-y-6">
               {error && <p className="text-red-500">{error}</p>}
-              <label className="block">Name</label>
-              <Input type="text" value={profileData.name} readOnly disabled />
-              <label className="block">Company Name</label>
-              <Input type="text" value={profileData.companyName} readOnly disabled />
-              <label className="block">Company Expected Activity</label>
-              <Input type="text" value={profileData.expectedActivity} readOnly disabled />
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" type="text" value={profileData.name} readOnly disabled />
+              <Label htmlFor="companyName">Company Name</Label>
+              <Input id="companyName" type="text" value={profileData.companyName} readOnly disabled />
+              <Label htmlFor="companyExpectedActivity">Company Expected Activity</Label>
+              <Input id="companyExpectedActivity" type="text" value={profileData.companyExpectedActivity} readOnly disabled />
             </div>
           </section>
         </main>
