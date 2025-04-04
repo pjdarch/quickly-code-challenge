@@ -16,11 +16,15 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"form">) {
   const [serverError, setServerError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginSchema) => {
+    setIsLoading(true);
+    setServerError("");
+
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
@@ -32,6 +36,8 @@ export function LoginForm({
     } else {
       redirect("/profile");
     }
+
+    setIsLoading(false); 
   };
 
   return (
@@ -54,8 +60,8 @@ export function LoginForm({
           {errors.password  && <p className="text-red-500 text-sm">{errors.password.message}</p>}
           {serverError && <p className="text-red-500 text-sm">{serverError}</p>}
         </div>
-        <Button type="submit" className="w-full">
-          Log in
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Log in"}
         </Button>
       </div>
     </form>
