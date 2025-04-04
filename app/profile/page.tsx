@@ -6,21 +6,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import PaymentDateChecker from "@/components/payment-date-checker";
+import { redirect } from "next/navigation";
 
 const fetchUserProfile = async (): Promise<UserResponse | null> => {
-  try {
-    const response = await fetch("/api/auth/user", { method: "GET" });
+  const response = await fetch("/api/auth/user", { method: "GET" });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || "Failed to fetch profile data.");
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      redirect("/");
     }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return null;
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to fetch profile data.");
   }
+
+  return await response.json();
 };
 
 export default function ProfilePage() {
@@ -44,6 +43,7 @@ export default function ProfilePage() {
           companyExpectedActivity: data.user.Company.expected_activity || "",
         });
       } else {
+
         setError("Failed to fetch profile data.");
       }
       setLoading(false);
