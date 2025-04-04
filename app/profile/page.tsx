@@ -60,10 +60,10 @@ export default function ProfilePage() {
               {error && <p className="text-red-500">{error}</p>}
               <Label htmlFor="name">Name</Label>
               <Input id="name" type="text" value={profileData.name} readOnly disabled />
-              <Label htmlFor="companyName">Company Name</Label>
-              <Input id="companyName" type="text" value={profileData.companyName} readOnly disabled />
-              <Label htmlFor="companyExpectedActivity">Company Expected Activity</Label>
-              <Input id="companyExpectedActivity" type="text" value={profileData.companyExpectedActivity} readOnly disabled />
+              <Label htmlFor="company-name">Company Name</Label>
+              <Input id="company-name" type="text" value={profileData.companyName} readOnly disabled />
+              <Label htmlFor="company-expected-activity">Company Expected Activity</Label>
+              <Input id="company-expected-activity" type="text" value={profileData.companyExpectedActivity} readOnly disabled />
             </div>
           </section>
         </main>
