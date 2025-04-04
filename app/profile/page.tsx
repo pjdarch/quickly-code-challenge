@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { UserResponse } from "../api/auth/user/route";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import PaymentDateChecker from "@/components/payment-date-checker";
 
 const fetchUserProfile = async (): Promise<UserResponse | null> => {
   try {
@@ -53,7 +54,7 @@ export default function ProfilePage() {
         <header className="space-y-0.5">
           <h2 className="text-2xl font-bold tracking-tight">Profile</h2>
         </header>
-        <main className="flex flex-col md:flex-row gap-8 mt-8">
+        <main className="flex flex-col md:flex-row gap-8 mt-8 mb-8">
           <section className="flex-1">
             <div className="space-y-6">
               {error && <p className="text-red-500">{error}</p>}
@@ -66,6 +67,9 @@ export default function ProfilePage() {
             </div>
           </section>
         </main>
+        <section>
+          <PaymentDateChecker />
+        </section>
       </div>
     </div>
   );
